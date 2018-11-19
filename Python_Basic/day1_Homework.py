@@ -73,11 +73,11 @@ b = ('h')
 # 2）将1生成的list3转换成元组(扩展：自己搜索方法)
 # 3）打印出只有一个元素'h'的元组，在2中生成的元组中的索引
 
-list3.extend(a)
-list3.extend(b)
+list3.append(a)
+list3.append(b)
 print(list3)
 
-newlist3 = (list3,)
+newlist3 = tuple(list3)
 print(newlist3)
 
 print(newlist3.index('h'))
