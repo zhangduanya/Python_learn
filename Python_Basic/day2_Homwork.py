@@ -48,5 +48,38 @@ else:
     print("you input is not a number!!")
 
 
-# 2. 企业发放的奖金根据利润提成。利润(I)低于或等于10万元时，奖金可提10%；利润高 于10万元，低于20万元时，低于10万元的部分按10%提成，高于10万元的部分，可可提 成7.5%；20万到40万之间时，高于20万元的部分，可提成5%；
-# 40万到60万之间时高于 40万元的部分，可提成3%；60万到100万之间时，高于60万元的部分，可提成1.5%，高于 100万元时，超过100万元的部分按1%提成，从键盘输入当月利润I，求应发放奖金总数？
+# 2. 企业发放的奖金根据利润提成。
+# 利润(I)低于或等于10万元时，奖金可提10%；
+# 利润高 于10万元，低于20万元时，低于10万元的部分按10%提成，高于10万元的部分，可可提 成7.5%；
+# 20万到40万之间时，高于20万元的部分，可提成5%；
+# 40万到60万之间时高于 40万元的部分，可提成3%；
+# 60万到100万之间时，高于60万元的部分，可提成1.5%，
+# 高于 100万元时，超过100万元的部分按1%提成，
+# 从键盘输入当月利润I，求应发放奖金总数？
+
+money = input("Pls input your lirun: ")
+lirun = [100000, 200000, 400000, 600000, 1000000]
+ticheng = [0.1, 0.075, 0.05, 0.03, 0.015, 0.01]
+
+if money.isdigit():
+    money = int(money)
+    if money <= lirun[0]:
+        get_money = money * ticheng[0]
+        print("this month you can get lirun is: {0}RMB".format(get_money))
+    elif lirun[0] < money <= lirun[1]:
+        get_money = (money - lirun[0]) * ticheng[1] + lirun[0] * ticheng[0]
+        print("this month you can get lirun is: {0}RMB".format(get_money))
+    elif lirun[1] < money <= lirun[2]:
+        get_money = (money - lirun[1]) * ticheng[2] + lirun[0] * ticheng[0] + lirun[0] * ticheng[1]
+        print("this month you can get lirun is: {0}RMB".format(get_money))
+    elif lirun[2] < money <= lirun[3]:
+        get_money = (money - lirun[2]) * ticheng[3] + lirun[0] * ticheng[0] + lirun[0] * ticheng[1] + lirun[1] * ticheng[2]
+        print("this month you can get lirun is: {0}RMB".format(get_money))
+    elif lirun[3] < money <= lirun[4]:
+        get_money = (money - lirun[3]) * ticheng[4] + lirun[0] * ticheng[0] + lirun[0] * ticheng[1] + lirun[1] * ticheng[2] + lirun[2] * ticheng[3]
+        print("this month you can get lirun is: {0}RMB".format(get_money))
+    elif money > lirun[4]:
+        get_money = (money - lirun[4]) * ticheng[5] + lirun[0] * ticheng[0] + lirun[0] * ticheng[1] + lirun[1] * ticheng[2] + lirun[2] * ticheng[3] + lirun[3] * ticheng[4]
+        print("this month you can get lirun is: {0}RMB".format(get_money))
+else:
+    print("you input was wrong!!")
