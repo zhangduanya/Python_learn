@@ -1,0 +1,8 @@
+1 zhangsan 18 python111 1212121211 Man
+2 lisi 38 python333 12145671 Women
+3 wangwu 48 python444 12134534211 Man
+4 niuliu 58 python222 12345341 Women
+5 Laoqi 29 python111 188xxxx2237 Man
+6 zhdya 28 python666 18862223222 Man
+12 wangaa 33 python343 12312324312 Women
+15 zhdya 32 python222 18862332237 MAN
