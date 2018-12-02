@@ -41,3 +41,40 @@
 - 当负载已经在运行中，再次去启动会有提示“ERROR!! the XXX is Running now!!”
 - 当负载已经停止，再次去停止会有提示“ERROR!! The XXX Already shutdown!!”
 - 模拟真实线上机器（一旦两组负载都下掉会出现线上故障），故当负载B已经停止了，再次去停止A，会有提示“WARNING!! The <B group ip> is Shutdown now!!”
+
+###程序演示执行结果：
+1:start nginx_A
+2:Shutdown nginx_A
+3:start nginx_B
+4:shutdown nginx_B
+5:restart Nginx
+6:update code
+Pls choice the number [quit for exit]: 1
+Start 10.0.0.1:8080 successful!!
+Start 10.0.0.2:8080 successful!!
+Pls choice the number [quit for exit]: 3
+Start 192.168.0.1:8080 successful!!
+Start 192.168.0.2:8080 successful!!
+Pls choice the number [quit for exit]: 1
+ERROR!! the 10.0.0.1:8080 is Running now!!
+ERROR!! the 10.0.0.2:8080 is Running now!!
+Pls choice the number [quit for exit]: 2
+Shutdown 10.0.0.1:8080 successful!!
+Shutdown 10.0.0.2:8080 successful!!
+Pls choice the number [quit for exit]: 4
+WARNING!! The 10.0.0.1:8080 is Shutdown now!!
+WARNING!! The 10.0.0.2:8080 is Shutdown now!!
+Shutdown 192.168.0.1:8080 successful!!
+Shutdown 192.168.0.2:8080 successful!!
+Pls choice the number [quit for exit]: 2
+ERROR!! The 10.0.0.1:8080 Already shutdown!!
+ERROR!! The 10.0.0.2:8080 Already shutdown!!
+WARNING!! The 192.168.0.1:8080 is Shutdown now!!
+WARNING!! The 192.168.0.2:8080 is Shutdown now!!
+Pls choice the number [quit for exit]: 3
+Start 192.168.0.1:8080 successful!!
+Start 192.168.0.2:8080 successful!!
+Pls choice the number [quit for exit]: 1
+Start 10.0.0.1:8080 successful!!
+Start 10.0.0.2:8080 successful!!
+Pls choice the number [quit for exit]: quit
