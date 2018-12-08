@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time    : 2018-12-8 17:02
+# @Time    : 2018-12-8 14:02
 # @Author  : zhdya@zhdya.cn
-# @File    : memcached_programⅡ.py
+# @File    : MONDAY.py
 
 
 ### write a rc python program
@@ -13,10 +13,10 @@ from subprocess import Popen, PIPE
 
 class Progress(object):
     '''Memcached service program'''
-    args = {'USER': 'memcached', 'PORT': 11211, 'MAXCONN': 1024, 'CACHESIZE': 64, 'OPTIONS': ''}    ##定义默认参数
-    def __init__(self, name, program, workdir):       ##初始化Progress的几个属性
+    def __init__(self, name, program, args, workdir):       ##初始化Progress的几个属性
         self.name = name
         self.program = program
+        self.args = args
         self.workdir = workdir
 
 
@@ -45,34 +45,11 @@ class Progress(object):
             sys.exit()
         else:
             self._init()
-            cmd = [self.program] + self._replaceConf() + ['-d', '-P', self._PidFile()]       ##启动参数
-            print(cmd)
-            p = Popen(cmd, stdout=PIPE)
-            # self.pid = p.pid        ##得到memcached的进程
-            # self._WritePid()        ##调用_WritePid方法
+            cmd = self.program + ' ' + self.args        ##/usr/bin/memcached -u nobody -p 11211 -c 1024 -m 64
+            p = Popen(cmd, stdout=PIPE, shell=True)
+            self.pid = p.pid        ##得到memcached的进程
+            self._WritePid()        ##调用_WritePid方法
             print("start {0} successful!!".format(self.name))
-
-
-    def _readConf(self, f):
-        with open(f) as fd:
-            lines = fd.readlines()
-            return dict([i.strip().replace('"','').split('=') for i in lines])      ##查看注解一
-
-
-    def _replaceConf(self):     ##以配置文件为主要配置文件
-        conf = self._readConf('/etc/sysconfig/memcached')
-        if 'USER' in conf:
-            self.args['USER'] = conf['USER']
-        if 'PORT' in conf:
-            self.args['PORT'] = conf['PORT']
-        if 'MAXCONN' in conf:
-            self.args['MAXCONN'] = conf['MAXCONN']
-        if 'CACHESIZE' in conf:
-            self.args['CACHESIZE'] = conf['CACHESIZE']
-        options = ['-u', self.args['USER'], '-p', self.args['PORT'], '-c', self.args['MAXCONN'], '-m', self.args['CACHESIZE']]
-        os.system("chown {0}:{0} {1}".format(self.args['USER'], self.workdir))         ##注解二
-        return options
-
 
     def _GetPid(self):
         pid = Popen(['pidof', self.name], stdout=PIPE)
@@ -105,8 +82,9 @@ class Progress(object):
 def main():
     name = 'memcached'
     prog = '/usr/bin/memcached'
+    args = '-u nobody -p 11211 -c 1024 -m 64'
     wd = '/tmp/memcached'
-    pm = Progress(name=name, program=prog, workdir=wd)
+    pm = Progress(name=name, program=prog, args=args, workdir=wd)
     try:
         cmd = sys.argv[1]
     except Exception as e:
@@ -125,36 +103,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-'''
-注解一：
-In [17]: f = open('/etc/sysconfig/memcached')
-
-In [18]: lines = f.readlines()
-
-In [19]: [i for i in lines]
-Out[19]:
-['PORT="11211"\n',
- 'USER="memcached"\n',
- 'MAXCONN="1024"\n',
- 'CACHESIZE="64"\n',
- 'OPTIONS=""\n']
-
-In [26]: dict([i.strip().replace('"','').split('=') for i in lines])        ##这个才是最终程序所需要的值
-Out[26]:
-{'CACHESIZE': '64',
- 'MAXCONN': '1024',
- 'OPTIONS': '',
- 'PORT': '11211',
- 'USER': 'memcached'}
- 
- 
-注解二：
-只要是不需要捕获参数值，我们就不需要使用Popen去捕获，执行bash命令 使用os.system即可
-
-In [33]: os.system("cat /etc/passwd | grep root")
-root:x:0:0:root:/root:/bin/bash
-operator:x:11:0:operator:/root:/sbin/nologin
-
-'''
