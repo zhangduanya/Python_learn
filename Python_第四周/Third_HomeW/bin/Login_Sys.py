@@ -15,7 +15,6 @@ class Login(object):
     numberwangwu = 1
 
     def lisi(self, pwd):
-
         self.pwd = pwd
         if settings.user_info[name] == pwd:
             print("This is you {0} times Login!!".format(Login.numberlisi))
