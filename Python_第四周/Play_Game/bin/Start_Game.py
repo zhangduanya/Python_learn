@@ -33,14 +33,14 @@ class Hero(object):
         TSEXP = 0.1 * self.HP + 0.015 * self.ATK + 0.001 * self.DEF + 0.25 * self.SP + 1 * self.RECOV
         return TSEXP
 
-    def TangZhangLao(self):
+    def PkTangZhangLao(self):
         new_pk_dic = {'zhubajie': self.zhubajie(), 'shasheng': self.shasheng(), 'sunwukong': self.sunwukong(), 'tangzhanglao': self.tangzhanglao()}
         shaixuan_pk_dic = {'zhubajie': self.zhubajie(), 'shasheng': self.shasheng(), 'sunwukong': self.sunwukong()}
         helper = input("You can call a helper [Y/N]: ")
-        arandom = random.sample(shaixuan_pk_dic.keys(), 1)
-        brandom = ''.join(arandom)
         if self.pk1 == 'tangzhanglao':
             del shaixuan_pk_dic[self.pk2]
+            arandom = random.sample(shaixuan_pk_dic.keys(), 1)
+            brandom = ''.join(arandom)
             if helper.strip().lower() != 'y':
                 print("<Game Over>: 人生苦短，万事无常... 你被爱徒{0}干死了...".format(self.pk2))
                 sys.exit()
@@ -55,6 +55,8 @@ class Hero(object):
                     print("Sorry, Unlucky the helper is {0} You Lose it!!".format(brandom))
         else:
             del shaixuan_pk_dic[self.pk1]
+            arandom = random.sample(shaixuan_pk_dic.keys(), 1)
+            brandom = ''.join(arandom)
             if helper.strip().lower() != 'y':
                 print("<Game Over>: 人生苦短，万事无常... 你被爱徒{0}干死了...".format(self.pk1))
                 sys.exit()
@@ -80,7 +82,7 @@ class Hero(object):
                     print("Pls choice different role!!")
                     sys.exit()
                 if self.pk1 == 'tangzhanglao' or self.pk2 == 'tangzhanglao':
-                    self.TangZhangLao()
+                    self.PkTangZhangLao()
                 else:
                     print("Start PK ...")
                     time.sleep(2)
@@ -98,7 +100,7 @@ class Hero(object):
             self.pk2 = a[1]
             print("*********{0} PK {1}*********".format(self.pk1, self.pk2))
             if self.pk1 == 'tangzhanglao' or self.pk2 == 'tangzhanglao':
-                self.TangZhangLao()
+                self.PkTangZhangLao()
             else:
                 print("Start PK ...")
                 time.sleep(2)
