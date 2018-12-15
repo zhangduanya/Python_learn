@@ -74,26 +74,30 @@ class Hero(object):
         new_pk_dic = {'zhubajie': self.zhubajie(), 'shasheng': self.shasheng(), 'sunwukong': self.sunwukong(), 'tangzhanglao': self.tangzhanglao()}
         mmode = input("Two Mode: [1(PK by manual)/2(PK By Auto)]: ")
         if mmode == '1':
-            self.pk1 = input("Pls input the PlayerA: ")      ##需要优化输入错误返回到main（）
-            self.pk2 = input("Pls input the PlayerB: ")
-            if self.pk1 in user_info.keys() and self.pk2 in user_info.keys():
-                print("*********{0} PK {1}*********".format(self.pk1, self.pk2))
-                if self.pk1 == self.pk2:
-                    print("Pls choice different role!!")
-                    sys.exit()
-                if self.pk1 == 'tangzhanglao' or self.pk2 == 'tangzhanglao':
-                    self.PkTangZhangLao()
-                else:
-                    print("Start PK ...")
-                    time.sleep(2)
-                    print("The Finally Result is ...")
-                    time.sleep(2)
-                    if new_pk_dic[self.pk1] > new_pk_dic[self.pk2]:
-                        print("Congralations, {0} is a Winnwer".format(self.pk1))
+            while True:
+                self.pk1 = input("Pls input the PlayerA: ")
+                self.pk2 = input("Pls input the PlayerB: ")
+                if self.pk1 in user_info.keys() and self.pk2 in user_info.keys():
+                    print("*********{0} PK {1}*********".format(self.pk1, self.pk2))
+                    if self.pk1 == self.pk2:
+                        print("Pls choice different role!!")
+                        sys.exit()
+                    if self.pk1 == 'tangzhanglao' or self.pk2 == 'tangzhanglao':
+                        self.PkTangZhangLao()
+                        break
                     else:
-                        print("Congralations, {0} is a Winnwer".format(self.pk2))
-            else:
-                print("you input was wrong!!")
+                        print("Start PK ...")
+                        time.sleep(2)
+                        print("The Finally Result is ...")
+                        time.sleep(2)
+                        if new_pk_dic[self.pk1] > new_pk_dic[self.pk2]:
+                            print("Congralations, {0} is a Winnwer".format(self.pk1))
+                            break
+                        else:
+                            print("Congralations, {0} is a Winnwer".format(self.pk2))
+                            break
+                else:
+                    print("you input was wrong!!")
         elif mmode == '2':
             a = random.sample(user_info.keys(), 2)
             self.pk1 = a[0]
