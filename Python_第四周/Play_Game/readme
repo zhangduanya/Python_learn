@@ -1,0 +1,63 @@
+####文字小游戏功能介绍：
+###目标为类，对象，方法的练习###
+- 全局设置4个人物：①tangzhanglao（唐长老）②sunwukong（孙悟空）③zhubajie（猪八戒）④沙僧（shasheng）；
+- 四个人物分别设置了不同的技能，汇总成EXP（战力）；
+- 游戏功能分为：
+    ①查看每个角色对于的EXP是多少；
+    ②手动选择对手PK；
+    ③自动选择对手PK；
+    ④手动：一旦选择相同的对手会提示报错；
+    ⑤自动：会自动筛选两个不同的角色来PK（排除掉一样的对手）；
+    ⑥不管手动还是自动，一旦选择了tangzhanglao（唐长老）就可以叫一个帮手（helper），然后helper和另外一个对手再次PK；
+    ⑦当抽取帮手时，只可以抽取除了tangzhanglao和PK2之外的帮手；
+    ⑧输入错误会提示错误信息；
+
+- 开始游戏：
+```
+pls choice the Number[1(CHECK EXP)/2(PK)/Quit For Exit]: 1
+Pls input your Hero's Nick name: zhubajie
+Zhubajie's EXP is 2130.0
+pls choice the Number[1(CHECK EXP)/2(PK)/Quit For Exit]: 2
+Two Mode: [1(PK by manual)/2(PK By Auto)]: 1
+Pls input the PlayerA: zhubajie
+Pls input the PlayerB: sunwukong
+*********zhubajie PK sunwukong*********
+Start PK ...
+The Finally Result is ...
+Congralations, sunwukong is a Winnwer
+pls choice the Number[1(CHECK EXP)/2(PK)/Quit For Exit]: 2
+Two Mode: [1(PK by manual)/2(PK By Auto)]: 1
+Pls input the PlayerA: zhubajie
+Pls input the PlayerB: tangzhanglao
+*********zhubajie PK tangzhanglao*********
+You can call a helper [Y/N]: y
+Start PK ...
+The Finally Result is ...
+You're so luckcy the helper is sunwukong and You're a Winner!
+pls choice the Number[1(CHECK EXP)/2(PK)/Quit For Exit]: 2
+Two Mode: [1(PK by manual)/2(PK By Auto)]: 2
+*********sunwukong PK zhubajie*********
+Start PK ...
+The Finally Result is ...
+Congralations, sunwukong is a Winnwer
+pls choice the Number[1(CHECK EXP)/2(PK)/Quit For Exit]: 2
+Two Mode: [1(PK by manual)/2(PK By Auto)]: 2
+*********shasheng PK tangzhanglao*********
+You can call a helper [Y/N]: y
+Start PK ...
+The Finally Result is ...
+Sorry, Unlucky the helper is shasheng You Lose it!!
+pls choice the Number[1(CHECK EXP)/2(PK)/Quit For Exit]: 2
+Two Mode: [1(PK by manual)/2(PK By Auto)]: 2
+*********shasheng PK sunwukong*********
+Start PK ...
+The Finally Result is ...
+Congralations, sunwukong is a Winnwer
+pls choice the Number[1(CHECK EXP)/2(PK)/Quit For Exit]: 2
+Two Mode: [1(PK by manual)/2(PK By Auto)]: 2
+*********tangzhanglao PK sunwukong*********
+You can call a helper [Y/N]: n
+<Game Over>: 人生苦短，万事无常... 你被爱徒sunwukong干死了...
+```
+
+
